@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful Scientific Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black; /* Initial color is black */
+            animation: backgroundChange 10s infinite alternate; /* Looping animation */
+        }
+
+        @keyframes backgroundChange {
+            0% { background-color: black; }
+            100% { background-color: red; }
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 320px;
+        }
+
+        .screen {
+            background-color: #e0f7fa;
+            border: 2px solid #4dd0e1;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 2em;
+            color: #000000; /* Always black text */
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        @keyframes rainbow {
+            0% { background-color: #ff0000; }
+            14% { background-color: #ff7f00; }
+            28% { background-color: #ffff00; }
+            42% { background-color: #00ff00; }
+            57% { background-color: #0000ff; }
+            71% { background-color: #4b0082; }
+            85% { background-color: #8b00ff; }
+            100% { background-color: #ff0000; }
+        }
+
+        button {
+            padding: 15px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        button.number {
+            animation: rainbow 0.5s infinite linear; /* Faster animation */
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .clear { background-color: #e57373; }
+        .equals { background-color: #ffb74d; }
+        .operator { background-color: #4dd0e1; }
+        .special { background-color: #81c784; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="screen" id="screen">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearScreen()">C</button>
+            <button class="number" onclick="appendValue('7')">7</button>
+            <button class="number" onclick="appendValue('8')">8</button>
+            <button class="number" onclick="appendValue('9')">9</button>
+            <button class="number" onclick="appendValue('4')">4</button>
+            <button class="number" onclick="appendValue('5')">5</button>
+            <button class="number" onclick="appendValue('6')">6</button>
+            <button class="number" onclick="appendValue('1')">1</button>
+            <button class="number" onclick="appendValue('2')">2</button>
+            <button class="number" onclick="appendValue('3')">3</button>
+            <button class="number" onclick="appendValue('0')">0</button>
+            <button class="special" onclick="appendValue('.')">.</button>
+            <button class="equals" onclick="calculate()">=</button>
+            <button class="operator" onclick="appendValue('+')">+</button>
+            <button class="operator" onclick="appendValue('-')">-</button>
+            <button class="operator" onclick="appendValue('*')">*</button>
+            <button class="operator" onclick="appendValue('/')">/</button>
+            <button class="special" onclick="appendValue('(')">(</button>
+            <button class="special" onclick="appendValue(')')">)</button>
+            <button class="special" onclick="appendValue('^')">^</button>
+            <button class="special" onclick="appendValue('Math.sqrt(')">√</button>
+            <button class="special" onclick="appendValue('Math.sin(')">sin</button>
+            <button class="special" onclick="appendValue('Math.cos(')">cos</button>
+            <button class="special" onclick="appendValue('Math.tan(')">tan</button>
+            <button class="special" onclick="appendValue('Math.log10(')">log</button>
+            <button class="special" onclick="appendValue('Math.PI')">π</button>
+            <button class="special" onclick="appendValue('Math.E')">e</button>
+        </div>
+    </div>
+
+    <script>
+        function clearScreen() {
+            document.getElementById('screen').innerText = '0';
+        }
+
+        function appendValue(value) {
+            const screen = document.getElementById('screen');
+            if (screen.innerText === '0') {
+                screen.innerText = value;
+            } else {
+                screen.innerText += value;
+            }
+        }
+
+        function calculate() {
+            const screen = document.getElementById('screen');
+            const expression = screen.innerText;
+
+            // Special cases
+            if (expression === '1+1') {
+                screen.innerText = 'imissyou';
+            } else if (expression === '14+3') {
+                screen.innerText = '🥺🥺';
+            } else {
+                try {
+                    screen.innerText = eval(expression);
+                } catch (error) {
+                    screen.innerText = 'Error';
+                }
+            }
+        }
+    </script>
+</body>
+              </html>
